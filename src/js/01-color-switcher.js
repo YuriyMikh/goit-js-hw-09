@@ -14,14 +14,12 @@ startButtonRef.addEventListener('click', event => {
   timerId = setInterval(() => {
     bodyRef.style.backgroundColor = getRandomHexColor();
   }, 1000);
-  console.log(timerId);
 });
 
 stopButtonRef.addEventListener('click', event => {
   startButtonRef.disabled = false;
   stopButtonRef.disabled = true;
   clearInterval(timerId);
-  console.log(timerId);
 });
 
 function getRandomHexColor() {
