@@ -9,7 +9,7 @@ startButtonRef.addEventListener('click', event => {
   stopButtonRef.disabled = false;
   bodyRef.style.backgroundColor = getRandomHexColor();
 
-  xx = setInterval(() => {
+  let xx = setInterval(() => {
     bodyRef.style.backgroundColor = getRandomHexColor();
   }, 1000);
   console.log(xx);
