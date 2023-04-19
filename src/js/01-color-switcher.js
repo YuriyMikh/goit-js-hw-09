@@ -5,18 +5,21 @@ const bodyRef = document.querySelector('body');
 stopButtonRef.disabled = true;
 
 startButtonRef.addEventListener('click', event => {
-    startButtonRef.disabled = true;
-    stopButtonRef.disabled = false;
-    bodyRef.style.backgroundColor = getRandomHexColor();
-  timerId = setInterval(() => {
+  startButtonRef.disabled = true;
+  stopButtonRef.disabled = false;
+  bodyRef.style.backgroundColor = getRandomHexColor();
+
+  xx = setInterval(() => {
     bodyRef.style.backgroundColor = getRandomHexColor();
   }, 1000);
+  console.log(xx);
 });
 
 stopButtonRef.addEventListener('click', event => {
-    startButtonRef.disabled = false;
-    stopButtonRef.disabled = true;
-  clearInterval(timerId);
+  startButtonRef.disabled = false;
+  stopButtonRef.disabled = true;
+  clearInterval(xx);
+  console.log(xx);
 });
 
 function getRandomHexColor() {
