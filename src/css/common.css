@@ -10,9 +10,31 @@ body {
   background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
+  
 }
 
 img {
   display: block;
   max-width: 100%;
+}
+
+.container {
+  text-align: center;
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+}
+
+.value {
+  display: block;
+  margin: 0 10px;
+  font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+}
+
+.label {
+  margin: 0 10px;
+  font-family: 'Times New Roman', Times, serif;
 }
