@@ -5,6 +5,8 @@ import Notiflix from 'notiflix';
 const startButtonRef = document.querySelector('button[data-start]');
 const inputRef = document.querySelector('#datetime-picker');
 
+flatpickr(inputRef, {  });
+
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -12,12 +14,16 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     console.log(selectedDates[0]);
+    const date1 = Date.now;
+    console.log(date1);
   },
 };
 
 startButtonRef.disabled = true;
 
 flatpickr(inputRef, { options });
+
+
 // if (3 > 2) {
 //   alert();
 // }
@@ -46,7 +52,3 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-
-// console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-// console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-// console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
