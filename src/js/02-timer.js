@@ -4,8 +4,18 @@ import Notiflix from 'notiflix';
 
 const startButtonRef = document.querySelector('button[data-start]');
 const inputRef = document.querySelector('#datetime-picker');
+const daysRef = document.querySelector('span[data-days]');
+const hoursRef = document.querySelector('span[data-hours]');
+const minutesRef = document.querySelector('span[data-minutes]');
+const secondsRef = document.querySelector('span[data-seconds]');
 
-flatpickr(inputRef, {  });
+let intervalId = null;
+let selectedDate = null;
+let currentDate = null;
+
+startButtonRef.disabled = true;
+
+startButtonRef.addEventListener('click', onStartCounter);
 
 const options = {
   enableTime: true,
@@ -13,26 +23,25 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
-    const date1 = Date.now;
-    console.log(date1);
+    if (selectedDates[0].getTime() < Date.now()) {
+      Notiflix.Report.failure(
+        'Error',
+        'Please choose a date in the future',
+        'OK'
+      );
+    } else {
+      selectedDate = selectedDates[0].getTime();
+      startButtonRef.disabled = false;
+      Notiflix.Report.success('Great', 'Now press the "Start" button', 'ОК');
+    }
   },
 };
 
-startButtonRef.disabled = true;
+flatpickr(inputRef, options);
 
-flatpickr(inputRef, { options });
-
-
-// if (3 > 2) {
-//   alert();
-// }
-
-// Notiflix.Notify.failure('Please choose a date in the future');
-// Notiflix.Report.failure('Охохо :-|', 'Надо бы выбрать дату в будущем, иначе ничё не получится', 'Я понял');
-// Notiflix.Report.success('Title', 'Message', 'Button Text');
-
-// console.log( options.onClose(selectedDates));
+function onStartCounter() {
+  counter.start();
+}
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -42,13 +51,44 @@ function convertMs(ms) {
   const day = hour * 24;
 
   // Remaining days
-  const days = Math.floor(ms / day);
+  const days = addLeadingZero(Math.floor(ms / day));
   // Remaining hours
-  const hours = Math.floor((ms % day) / hour);
+  const hours = addLeadingZero(Math.floor((ms % day) / hour));
   // Remaining minutes
-  const minutes = Math.floor(((ms % day) % hour) / minute);
+  const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
   // Remaining seconds
-  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+  const seconds = addLeadingZero(
+    Math.floor((((ms % day) % hour) % minute) / second)
+  );
 
   return { days, hours, minutes, seconds };
+}
+
+const counter = {
+  start() {
+    intervalId = setInterval(() => {
+      currentDate = Date.now();
+      const deltaTime = selectedDate - currentDate;
+      updateTimerFace(convertMs(deltaTime));
+      startButtonRef.disabled = true;
+      inputRef.disabled = true;
+
+      if (deltaTime <= 1000) {
+        clearInterval(intervalId);
+        startButtonRef.disabled = true;
+        inputRef.disabled = false;
+      }
+    }, 1000);
+  },
+};
+
+function updateTimerFace({ days, hours, minutes, seconds }) {
+  daysRef.textContent = `${days}`;
+  hoursRef.textContent = `${hours}`;
+  minutesRef.textContent = `${minutes}`;
+  secondsRef.textContent = `${seconds}`;
+}
+
+function addLeadingZero(value) {
+  return value.toString().padStart(2, 0);
 }
