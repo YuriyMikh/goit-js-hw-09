@@ -72,7 +72,6 @@ const counter = {
   start() {
     intervalId = setInterval(() => {
       currentDate = Date.now();
-      console.log(selectedDate);
       const deltaTime = selectedDate - currentDate;
       updateTimerFace(convertMs(deltaTime));
       startButtonRef.disabled = true;
