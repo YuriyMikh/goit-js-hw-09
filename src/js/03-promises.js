@@ -5,10 +5,12 @@ formRef.addEventListener('submit', handlerSubmitForm);
 
 function handlerSubmitForm(event) {
   event.preventDefault();
+  //переменные для сохранения значений инпутов. Сразу переводим в число используя "+"
   let inputDelay = +formRef.elements.delay.value;
   let inputStep = +formRef.elements.step.value;
   let inputAmount = +formRef.elements.amount.value;
   
+//перебираем циклом, чтобы вызывать промисы необходимое количество раз 
   for (let i = 1; i <= inputAmount; i += 1) {
     createPromise(i, inputDelay)
       .then(({ position, delay }) => {
@@ -21,7 +23,7 @@ function handlerSubmitForm(event) {
           `❌ Rejected promise ${position} in ${delay}ms`
         );
       });
-    inputDelay += inputStep;
+    inputDelay += inputStep; //на каждой итерации добавляем к задержке добавляем шаг задержки
   }
 }
 
