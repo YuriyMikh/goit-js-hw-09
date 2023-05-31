@@ -10,7 +10,6 @@ body {
   background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
-  
 }
 
 img {
@@ -31,10 +30,20 @@ img {
   display: block;
   margin: 0 10px;
   font-family: 'Times New Roman', Times, serif;
-    font-size: 35px;
+  font-size: 35px;
 }
 
 .label {
   margin: 0 10px;
   font-family: 'Times New Roman', Times, serif;
+}
+
+.container-color-switcher {
+  text-align: center;
+}
+
+.button-color-switcher {
+  font-size: 25px;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
