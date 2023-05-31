@@ -23,7 +23,7 @@ function handlerSubmitForm(event) {
           `❌ Rejected promise ${position} in ${delay}ms`
         );
       });
-    inputDelay += inputStep; //на каждой итерации добавляем к задержке добавляем шаг задержки
+    inputDelay += inputStep; //на каждой итерации добавляем к задержке шаг задержки
   }
 }
 
